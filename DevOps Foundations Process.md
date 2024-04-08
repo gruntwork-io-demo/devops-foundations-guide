@@ -1,5 +1,40 @@
 # DevOps Foundations Process
 
+- [DevOps Foundations Process](#devops-foundations-process)
+- [Prerequisites](#prerequisites)
+- [Skills required](#skills-required)
+- [Outcomes](#outcomes)
+- [Create AWS Account](#create-aws-account)
+- [Create break glass IAM administrator user and group](#create-break-glass-iam-administrator-user-and-group)
+- [Create a KMS key to encrypt CloudTrail and Config](#create-a-kms-key-to-encrypt-cloudtrail-and-config)
+- [Enable Control Tower + AWS SSO](#enable-control-tower-and-aws-sso)
+- [Signing in via SSO for the first time](#signing-in-via-sso-for-the-first-time)
+- [Customize AWS SSO/IAM Identity Center settings](#customize-aws-ssoiam-identity-center-settings)
+- [Create `prod` OU](#create-prod-ou)
+- [Create `shared` account](#create-shared-account)
+- [Create two GitHub machine users (write and read-only)](#create-two-github-machine-users-write-and-read-only)
+- [Create new GitHub Organization](#create-new-github-organization)
+- [Generate IaC repositories](#generate-iac-repositories)
+- [Create GitHub Teams](#create-github-teams)
+- [Generate machine user access keys](#generate-machine-user-access-keys)
+    - [CI machine user secret creation](#ci-machine-user-secret-creation)
+    - [ci-read-only-user GitHub token creation](#ci-read-only-user-github-token-creation)
+- [Optional: Test access tokens locally](#optional-test-access-tokens-locally)
+- [Paid GitHub Org - Create GitHub Organization-level secrets](#paid-github-org---create-github-organization-level-secrets)
+- [Free GitHub Org - Add secrets to each repository](#free-github-org---add-secrets-to-each-repository)
+    - [infrastructure-live](#infrastructure-live)
+    - [infrastructure-pipelines](#infrastructure-pipelines)
+- [Configure the IaC repositories for bootstrapping](#configure-the-iac-repositories-for-bootstrapping)
+    - [Review initial templated repositories with Solutions Architect](#review-initial-templated-repositories-with-solutions-architect)
+    - [Bootstrap infrastructure-live](#bootstrap-infrastructure-live)
+- [Local bootstrapping process from new PR](#local-bootstrapping-process-from-new-pr)
+- [Review initial pull request for four new accounts](#review-initial-pull-request-for-four-new-accounts)
+- [Run Terragrunt locally for four initial accounts](#run-terragrunt-locally-for-four-initial-accounts)
+- [New account factory manual setup, adding an IAM principal](#new-account-factory-manual-setup-adding-an-iam-principal)
+- [Bootstrap Pipelines Repo](#bootstrap-pipelines-repo)
+- [Setup GitHub branch protection](#setup-github-branch-protection)
+- [Cleanup](#cleanup)
+
 # Prerequisites
 
 - Permission to create a new AWS Organization
@@ -148,7 +183,7 @@
 
 - Copy paste this into the KMS key policy and save it.
 
-# Enable Control Tower + AWS SSO
+# Enable Control Tower and AWS SSO
 
 - **Enable Control Tower, following the naming conventions in the docs**
     - [https://us-east-2.console.aws.amazon.com/controltower](https://us-east-2.console.aws.amazon.com/controltower)
@@ -192,7 +227,8 @@
 - Wait for Control Tower to finish setting itself up, take a break, stretch.
 - Sign out of the root user
 
-# Signing in via SSO for the first time 🎉
+# Signing in via SSO for the first time 
+🎉
 
 - You should receive an email for a new AWS SSO user
 - Sign in and set a password for the new AWS SSO user
@@ -689,11 +725,11 @@ In the `infrastructure-pipelines` repository create the following secrets:
 - T**his is about 4 hours into the process**
 - Navigate to pipelines repo
 - Run GitHub Actions bootstrap
-- Review, merge pipeles PR and remove temporary tokens
+- Review, merge pipelines PR and remove temporary tokens
 - Go back to `infrastructure-live`, merge that bootstrap PR
 - J**obs will run, this is about 4hr 40 minutes into the process**
 
-# New account factory manual setup, adding an IAM princpal:
+# New account factory manual setup, adding an IAM principal
 
 ### Permissions for Account Factory Portfolio
 
